@@ -1,4 +1,12 @@
 # currency-converter-pwa-vue
+## PWA prototype
+
+Written as a knowledge test
+Used Vue, Bootstrap, IndexedDB
+Testing by MochaJS
+
+See [Online](https://tabulan.ga/converter/).
+
 
 ## Project setup
 ```
@@ -15,20 +23,7 @@ npm run serve
 npm run build
 ```
 
-### Run your tests
-```
-npm run test
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
 ### Run your unit tests
 ```
 npm run test:unit
 ```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).

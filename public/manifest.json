@@ -1,6 +1,6 @@
 {
   "name": "currency-converter-pwa-vue",
-  "short_name": "currency-converter-pwa-vue",
+  "short_name": "currency-converter",
   "icons": [
     {
       "src": "./img/icons/android-chrome-192x192.png",
