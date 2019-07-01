@@ -1,8 +1,6 @@
-<template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <Converter/>
-  </div>
+<template lang='pug'>
+  div#app
+    Converter(v-bind:currencyRates="rates")
 </template>
 
 <script>
@@ -12,6 +10,58 @@ export default {
   name: 'app',
   components: {
     Converter,
+  },
+  data() {
+    return {
+      dailyRatesUrl: 'https://www.cbr-xml-daily.ru/daily_json.js',
+      rates: {}
+    };
+  },
+  methods: {
+    async fetchCurrencyRates() {
+      const defaultCurrency = {
+        'RUB': {
+          'ID': 'R00000',
+          'CharCode': 'RUB',
+          'Nominal': 1,
+          'Name': 'Российский рубль',
+          'Value': 1,
+        }
+      };
+
+      const json = await fetch(this.dailyRatesUrl)
+        .then(responce => responce.json())
+        .catch((err) => {
+          console.error(err);
+        });
+
+      const data = defaultCurrency;
+      this.$_.extend(data, json.Valute);
+
+      this.$setItem('Date', json.Date);
+      this.$setItem('Valute', data);
+
+      return data;
+    },
+
+    actuallyRates(date) {
+      const now = this.$moment();
+      const duration = this.$moment
+        .duration(now.diff(date))
+        .asHours();
+      
+      return (duration > 24) ? false : true;
+    },
+
+    async loadCurrencyRates() {
+      const dateUpdate = await this.$getItem('Date');
+      this.rates = (!dateUpdate || !this.actuallyRates(dateUpdate)) 
+        ? await this.fetchCurrencyRates()
+        : await this.$getItem('Valute');
+    },
+  },
+  created() {
+    this.loadCurrencyRates();
   },
 };
 </script>
