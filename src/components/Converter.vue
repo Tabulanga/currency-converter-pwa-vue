@@ -1,5 +1,5 @@
 <template lang='pug'>
-  div.converter
+  b-container.converter
     img(alt="Vue logo" src="../assets/logo.png")
     h1 Конвертер валют
     b-input-group(size="lg")
@@ -32,9 +32,6 @@ export default {
     };
   },
   computed: {
-    currencyList() {
-      return this.$_.keys(this.currencyRates);
-    },
     firstData() {
       return this.currencyRates[this.firstName];
     },

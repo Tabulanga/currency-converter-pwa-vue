@@ -18,7 +18,7 @@ export default {
     };
   },
   methods: {
-    async fetchCurrencyRates() {
+    async fetchCurrencyRates(url) {
       const defaultCurrency = {
         'RUB': {
           'ID': 'R00000',
@@ -29,7 +29,7 @@ export default {
         }
       };
 
-      const json = await fetch(this.dailyRatesUrl)
+      const json = await fetch(url)
         .then(responce => responce.json())
         .catch((err) => {
           console.error(err);
@@ -53,15 +53,15 @@ export default {
       return (duration > 24) ? false : true;
     },
 
-    async loadCurrencyRates() {
+    async loadCurrencyRates(url) {
       const dateUpdate = await this.$getItem('Date');
       this.rates = (!dateUpdate || !this.actuallyRates(dateUpdate)) 
-        ? await this.fetchCurrencyRates()
+        ? await this.fetchCurrencyRates(url)
         : await this.$getItem('Valute');
     },
   },
   created() {
-    this.loadCurrencyRates();
+    this.loadCurrencyRates(this.dailyRatesUrl);
   },
 };
 </script>
