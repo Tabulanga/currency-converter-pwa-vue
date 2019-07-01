@@ -1,9 +1,9 @@
 # currency-converter-pwa-vue
 ## PWA prototype
 
-Written as a knowledge test
-Used Vue, Bootstrap, IndexedDB
-Testing by MochaJS
+Written as a knowledge test  
+Used Vue, Bootstrap, IndexedDB  
+Testing by MochaJS  
 
 See [Online](https://tabulan.ga/converter/).
 
